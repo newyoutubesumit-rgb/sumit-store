@@ -1,0 +1,25 @@
+.card{
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    text-align:center;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+}
+
+.card h2{
+    margin-bottom:15px;
+}
+
+.card p{
+    color:gray;
+}
+
+.card h3{
+    color:#2563eb;
+    margin-top:15px;
+}
