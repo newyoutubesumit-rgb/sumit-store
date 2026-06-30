@@ -5,65 +5,20 @@ import {
   FaStar,
 } from "react-icons/fa";
 import { motion } from "framer-motion";
-
-const products = [
-  {
-    name: "Premium Notebook",
-    price: "₹120",
-    category: "Stationery",
-    image:
-      "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=900",
-  },
-  {
-    name: "Luxury Pen Set",
-    price: "₹350",
-    category: "Stationery",
-    image:
-      "https://images.unsplash.com/photo-1517842645767-c639042777db?w=900",
-  },
-  {
-    name: "School Bag",
-    price: "₹899",
-    category: "Bags",
-    image:
-      "https://images.unsplash.com/photo-1581605405669-fcdf81165afa?w=900",
-  },
-  {
-    name: "Sports Shoes",
-    price: "₹1499",
-    category: "Shoes",
-    image:
-      "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=900",
-  },
-  {
-    name: "Gift Item",
-    price: "₹499",
-    category: "Gift",
-    image:
-      "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=900",
-  },
-  {
-    name: "Colour Kit",
-    price: "₹280",
-    category: "Art",
-    image:
-      "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=900",
-  },
-];
+import { products } from "../data/products";
 
 const categories = [
-  "All",
-  "Stationery",
-  "Bags",
-  "Shoes",
-  "Gift",
-  "Art",
-];
+    "All",
+    "Notebooks",
+  ];
+
 
 function Products() {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
-
+  const [selectedProduct, setSelectedProduct] = useState(null);
+const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedSubject, setSelectedSubject] = useState("");
   const filtered = useMemo(() => {
     return products.filter((item) => {
       const name = item.name
@@ -173,11 +128,19 @@ function Products() {
 
               <div className="overflow-hidden">
 
-                <img
-                  src={item.image}
-                  alt={item.name}
-                  className="h-72 w-full object-cover group-hover:scale-110 duration-700"
-                />
+              <div className="overflow-hidden relative">
+
+<span className="absolute top-4 left-4 z-10 bg-yellow-500 text-black px-3 py-1 rounded-full text-xs font-bold">
+  ⭐ Best Seller
+</span>
+
+<img
+  src={item.image}
+  alt={item.name}
+  className="h-72 w-full object-cover group-hover:scale-110 duration-700"
+/>
+
+</div>
 
               </div>
 
@@ -194,6 +157,23 @@ function Products() {
                   {item.name}
 
                 </h3>
+                <div className="flex items-center gap-2 mt-3">
+  <span className="w-3 h-3 bg-green-500 rounded-full"></span>
+
+  <span className="text-green-400 text-sm font-semibold">
+    In Stock
+  </span>
+</div>
+                <div className="flex flex-wrap gap-2 mt-4">
+  {item.subjects?.map((subject) => (
+    <span
+      key={subject}
+      className="px-3 py-1 rounded-full bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 text-sm"
+    >
+      {subject}
+    </span>
+  ))}
+</div>
 
                 <div className="flex items-center gap-1 text-yellow-500 mt-3">
 
@@ -204,15 +184,37 @@ function Products() {
                   <FaStar />
 
                 </div>
+                <p className="text-gray-400 mt-4 text-sm leading-6">
+  {item.description}
+</p>
 
-                <p className="text-yellow-500 text-3xl font-bold mt-5">
+                <div className="mt-5">
+  <p className="text-gray-500 line-through text-lg">
+    ₹{item.originalPrice}
+  </p>
 
-                  {item.price}
+  <div className="flex items-center gap-3">
+    <p className="text-yellow-500 text-3xl font-bold">
+      ₹{item.price}
+    </p>
 
-                </p>
+    <span className="bg-red-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+      SAVE ₹5
+    </span>
+  </div>
+</div>
 
-                <a
-                  href={`https://wa.me/916230671572?text=Hello, I am interested in ${item.name}`}
+<button
+  onClick={() => {
+    setSelectedProduct(item);
+    setIsModalOpen(true);
+  }}
+  className="w-full mb-4 py-4 rounded-full border border-yellow-500 text-yellow-400 font-bold hover:bg-yellow-500 hover:text-black transition duration-300"
+>
+  View Details
+</button>
+<a
+                  href={`https://wa.me/916230671572?text=${encodeURIComponent(item.whatsappMessage)}`}
                   target="_blank"
                   rel="noreferrer"
                   className="mt-7 flex justify-center items-center gap-3 bg-green-500 py-4 rounded-full font-bold text-white hover:scale-[1.03] duration-300"
@@ -231,7 +233,70 @@ function Products() {
           ))}
 
         </div>
+        {isModalOpen && selectedProduct && (
+  <div
+    className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4"
+    onClick={() => setIsModalOpen(false)}
+  >
+    <div
+      onClick={(e) => e.stopPropagation()}
+      className="bg-[#111] border border-yellow-500 rounded-3xl w-full max-w-4xl max-h-[90vh] overflow-y-auto p-4 sm:p-6"
+    >
+      <button
+        onClick={() => setIsModalOpen(false)}
+        className="float-right text-2xl text-white"
+      >
+        ✕
+      </button>
 
+      <img
+        src={selectedProduct.image}
+        alt={selectedProduct.name}
+        className="w-full h-80 object-cover rounded-2xl"
+      />
+
+      <h2 className="text-2xl sm:text-3xl font-bold text-white mt-6">
+        {selectedProduct.name}
+      </h2>
+
+      <p className="text-gray-400 mt-3">
+        {selectedProduct.description}
+      </p>
+
+      <div className="flex items-center gap-3 mt-5">
+        <span className="line-through text-gray-500">
+          ₹{selectedProduct.originalPrice}
+        </span>
+
+        <span className="text-3xl font-bold text-yellow-500">
+          ₹{selectedProduct.price}
+        </span>
+      </div>
+
+      <div className="flex flex-wrap gap-2 mt-5">
+        {selectedProduct.subjects.map((sub) => (
+          <span
+            key={sub}
+            className="px-3 py-1 rounded-full bg-yellow-500/10 text-yellow-400"
+          >
+            {sub}
+          </span>
+        ))}
+      </div>
+
+      <a
+        href={`https://wa.me/916230671572?text=${encodeURIComponent(
+          selectedProduct.whatsappMessage
+        )}`}
+        target="_blank"
+        rel="noreferrer"
+        className="mt-8 flex justify-center items-center bg-green-500 text-white py-4 rounded-full font-bold"
+      >
+        Order on WhatsApp
+      </a>
+    </div>
+  </div>
+)}
       </div>
     </section>
   );
