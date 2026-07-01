@@ -136,4 +136,51 @@ export const products = [
       "three in one",
     ],
   },
+  {
+    id: 4,
+  
+    name: "Ashoka Rain Kids Notebook",
+  
+    brand: "Ashoka",
+  
+    category: "Notebooks",
+  
+    image: "/images/products/ashoka-rain-kids-notebook.png",
+  
+    price: 40,
+  
+    originalPrice: 45,
+  
+    rating: 4.8,
+  
+    inStock: true,
+  
+    badge: "Budget",
+  
+    subjects: [
+      "Hindi",
+      "English",
+      "Mathematics",
+      "Three in One",
+    ],
+  
+    description:
+      "Ashoka Rain Kids notebook with premium quality paper and strong binding. A great budget-friendly notebook for everyday school use.",
+  
+    whatsappMessage:
+      "Hello Sumit Store, I want to order Ashoka Rain Kids Notebook.",
+  
+    searchKeywords: [
+      "ashoka",
+      "rain",
+      "kids",
+      "notebook",
+      "copy",
+      "school",
+      "hindi",
+      "english",
+      "mathematics",
+      "three in one",
+    ],
+  },
 ];
