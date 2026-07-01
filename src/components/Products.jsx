@@ -137,7 +137,7 @@ const [isModalOpen, setIsModalOpen] = useState(false);
 <img
   src={item.image}
   alt={item.name}
-  className="h-72 w-full object-cover group-hover:scale-110 duration-700"
+  className="h-72 w-full object-contain bg-white p-2 group-hover:scale-105 duration-700"
 />
 
 </div>
@@ -250,10 +250,10 @@ const [isModalOpen, setIsModalOpen] = useState(false);
       </button>
 
       <img
-        src={selectedProduct.image}
-        alt={selectedProduct.name}
-        className="w-full h-80 object-cover rounded-2xl"
-      />
+  src={selectedProduct.image}
+  alt={selectedProduct.name}
+  className="w-full h-80 object-contain bg-white rounded-2xl p-3"
+/>
 
       <h2 className="text-2xl sm:text-3xl font-bold text-white mt-6">
         {selectedProduct.name}
