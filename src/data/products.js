@@ -90,4 +90,50 @@ export const products = [
       "three in one",
     ],
   },
+  {
+    id: 3,
+  
+    name: "Ashoka Apple Design Notebook",
+  
+    brand: "Ashoka",
+  
+    category: "Notebooks",
+  
+    image: "/images/products/ashoka-apple-notebook.png",
+  
+    price: 70,
+  
+    originalPrice: 75,
+  
+    rating: 4.9,
+  
+    inStock: true,
+  
+    badge: "Trending",
+  
+    subjects: [
+      "Hindi",
+      "English",
+      "Mathematics",
+      "Three in One",
+    ],
+  
+    description:
+      "Premium quality Ashoka Apple Design notebook with smooth writing paper and durable binding. Perfect for everyday school use.",
+  
+    whatsappMessage:
+      "Hello Sumit Store, I want to order Ashoka Apple Design Notebook.",
+  
+    searchKeywords: [
+      "ashoka",
+      "apple",
+      "notebook",
+      "copy",
+      "school",
+      "hindi",
+      "english",
+      "mathematics",
+      "three in one",
+    ],
+  },
 ];
